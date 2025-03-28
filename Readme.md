@@ -46,11 +46,12 @@ Please refer the the source code in `examples` for complete examples.
 
 Currently `gliclass-rs` has been tested with the following models:
 
-|Model                      |Download                                                                    |prompt_first|
-|---------------------------|----------------------------------------------------------------------------|------------|
-|`gliclass-small-1.0`       |[HF Hub](https://huggingface.co/knowledgator/gliclass-small-v1.0)           |`false`     |
-|`gliclass-large-1.0`       |[HF Hub](https://huggingface.co/knowledgator/gliclass-large-v1.0)           |`false`     |
-|`gliclass-modern-base-v2.0`|[HF Hub](https://huggingface.co/knowledgator/gliclass-modern-base-v2.0-init)|`true`      |
+|Model                           |Download                                                                    |prompt_first|
+|--------------------------------|----------------------------------------------------------------------------|------------|
+|`gliclass-small-1.0`            |[HF Hub](https://huggingface.co/knowledgator/gliclass-small-v1.0)           |`false`     |
+|`gliclass-large-1.0`            |[HF Hub](https://huggingface.co/knowledgator/gliclass-large-v1.0)           |`false`     |
+|`gliclass-modern-base-v2.0-init`|[HF Hub](https://huggingface.co/knowledgator/gliclass-modern-base-v2.0-init)|`true`      |
+|`gliclass-modern-large-v2.0`    |[HF Hub](https://huggingface.co/knowledgator/gliclass-modern-large-v2.0)    |`true`      |
 
 It should work out-of-the-box with other equivalent models, please report your own experiments. 
 

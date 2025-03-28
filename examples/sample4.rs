@@ -1,9 +1,9 @@
 //! Complete example for zero-shot text classification.
-//! Uses the `gliclass-modern-base-v2.0-init` model, which requires `prompt_first=true`.
+//! Uses the `gliclass-modern-large-v2.0` model, which requires `prompt_first=true`.
 
 fn main() -> gliclass::util::result::Result<()> {    
-    const TOKENIZER_PATH: &str = "models/gliclass-modern-base-v2.0-init/tokenizer.json";
-    const MODEL_PATH: &str = "models/gliclass-modern-base-v2.0-init/onnx/model.onnx";
+    const TOKENIZER_PATH: &str = "models/gliclass-modern-large-v2.0/tokenizer.json";
+    const MODEL_PATH: &str = "models/gliclass-modern-large-v2.0/onnx/model.onnx";
 
     let params = gliclass::params::Parameters::default().with_prompt_first(true);
     let pipeline = gliclass::pipeline::ClassificationPipeline::new(TOKENIZER_PATH, &params)?;
