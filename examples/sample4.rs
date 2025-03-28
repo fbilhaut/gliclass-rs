@@ -1,11 +1,13 @@
 //! Complete example for zero-shot text classification.
-//! Uses the `gliclass-modern-large-v2.0` model, which requires `prompt_first=true`.
+//! Uses the `gliclass-modern-large-v2.0` model (which requires `prompt_first=true`).
+//! The parameters are loaded from the `config.json` file.
 
 fn main() -> gliclass::util::result::Result<()> {    
+    const CONFIG_PATH: &str = "models/gliclass-modern-large-v2.0/config.json";
     const TOKENIZER_PATH: &str = "models/gliclass-modern-large-v2.0/tokenizer.json";
     const MODEL_PATH: &str = "models/gliclass-modern-large-v2.0/onnx/model.onnx";
 
-    let params = gliclass::params::Parameters::default().with_prompt_first(true);
+    let params = gliclass::params::Parameters::from_json(CONFIG_PATH)?;
     let pipeline = gliclass::pipeline::ClassificationPipeline::new(TOKENIZER_PATH, &params)?;
     let model = orp::model::Model::new(MODEL_PATH, orp::params::RuntimeParameters::default())?;
             

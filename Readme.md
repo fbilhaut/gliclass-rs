@@ -55,7 +55,7 @@ Currently `gliclass-rs` has been tested with the following models:
 
 It should work out-of-the-box with other equivalent models, please report your own experiments. 
 
-⚠️ Take care of setting the `prompt_first` parameter according the selected model's expectations (the appropriate value is indicated in the `config.json` that goes with the model).
+⚠️ Take care of setting the `prompt_first` parameter according the selected model's expectations, or read parameters from the `config.json` that goes with the model (0.9.1+).
 
 
 ## 👉 Related
