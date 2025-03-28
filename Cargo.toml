@@ -1,0 +1,25 @@
+[package]
+name = "gliclass-rs"
+version = "0.9.0"
+edition = "2021"
+authors = ["Frédérik Bilhaut <frederik.bilhaut@gmail.com>"]
+license = "Apache-2.0"
+keywords = ["NLP", "GLiClass", "classification"]
+readme = "./Readme.md"
+description = "Inference engine for GLiClass models"
+homepage = "https://github.com/fbilhaut/gliclass-rs"
+repository = "https://github.com/fbilhaut/gliclass-rs"
+documentation = "https://docs.rs/gliclass-rs/"
+exclude = [ "models" ]
+
+[lib]
+name = "gliclass"
+path = "src/lib.rs"
+
+[dependencies]
+orp = "0.9.2"
+composable = "0.9.0"
+ort = { version="=2.0.0-rc.9" }
+tokenizers = { version="0.21.0", features=["http"] }
+ndarray = "0.16.0"
+ordered-float = "5"
