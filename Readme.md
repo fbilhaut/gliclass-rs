@@ -55,3 +55,11 @@ Currently `gliclass-rs` has been tested with the following models:
 It should work out-of-the-box with other equivalent models, please report your own experiments. 
 
 ⚠️ Take care of setting the `prompt_first` parameter according the selected model's expectations (the appropriate value is indicated in the `config.json` that goes with the model).
+
+
+## 👉 Related
+
+This project follows the same principles as the ones below. Refer to their documentation for more details:
+
+* 🌿 [gline-rs](https://github.com/fbilhaut/gline-rs): inference engine for GLiNER models
+* 🧲 [gte-rs](https://github.com/fbilhaut/gte-rs): general text embedding and re-ranking
