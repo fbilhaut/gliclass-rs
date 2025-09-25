@@ -20,8 +20,30 @@ path = "src/lib.rs"
 orp = "0.9.2"
 composable = "0.9.0"
 ort = { version="=2.0.0-rc.9" }
+ort-sys = { version = "=2.0.0-rc.9", default-features = false } # see https://github.com/pykeio/ort/issues/399
 tokenizers = { version="0.21.0", features=["http"] }
 ndarray = "0.16.0"
 ordered-float = "5"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1"
+
+[features]
+default = []
+load-dynamic = ["ort/load-dynamic"]
+cuda = ["ort/cuda"]
+tensorrt = ["ort/tensorrt"]
+directml = ["ort/directml"]
+coreml = ["ort/coreml"]
+rocm = ["ort/rocm"]
+openvino = ["ort/openvino"]
+onednn = ["ort/onednn"]
+xnnpack = ["ort/xnnpack"]
+qnn = ["ort/qnn"]
+cann = ["ort/cann"]
+nnapi = ["ort/nnapi"]
+tvm = ["ort/tvm"]
+acl = ["ort/acl"]
+armnn = ["ort/armnn"]
+migraphx = ["ort/migraphx"]
+vitis = ["ort/vitis"]
+rknpu = ["ort/rknpu"]

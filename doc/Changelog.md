@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 * Add the ability to load the `Parameters` from a `config.json` file as provided with the models.
-
+* Add transitive feature flags in `Cargo.toml` to allow for `orp`/`ort` GPU settings to be set.
 
 ## [0.9.0] - 2025-03-30
 
