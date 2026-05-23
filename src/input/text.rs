@@ -17,7 +17,7 @@ impl Labels {
     pub fn get(&self, text_index: usize) -> Option<&Vec<String>> {
         match self {
             Labels::Unique(labels) => Some(labels),
-            Labels::PerText(labels) => { labels.get(text_index) }
+            Labels::PerText(labels) => labels.get(text_index),
         }
     }
 }
@@ -32,7 +32,7 @@ impl TextInput {
     }
 
     /// Creates an input with the same set of labels for every text
-    pub fn from_str(texts: &[&str], labels: &[&str]) -> Self {        
+    pub fn from_str(texts: &[&str], labels: &[&str]) -> Self {
         Self::new(
             texts.iter().map(ToString::to_string).collect(),
             labels.iter().map(ToString::to_string).collect(),
@@ -50,10 +50,13 @@ impl TextInput {
 
     /// Creates an input with a different set of labels for each text.
     /// The texts and labels arrays must have the same length, otherwise an error will be raised at some point.
-    pub fn from_str_per_text(texts: &[&str], labels: &[&[&str]]) -> Self {        
+    pub fn from_str_per_text(texts: &[&str], labels: &[&[&str]]) -> Self {
         Self::new_per_text(
             texts.iter().map(ToString::to_string).collect(),
-            labels.iter().map(|inner| inner.iter().map(ToString::to_string).collect()).collect(),
+            labels
+                .iter()
+                .map(|inner| inner.iter().map(ToString::to_string).collect())
+                .collect(),
         )
     }
 }

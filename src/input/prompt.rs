@@ -1,5 +1,5 @@
+use crate::{params::Parameters, util::error::InputError};
 use composable::Composable;
-use crate::{util::error::InputError, params::Parameters};
 
 use super::text::{Labels, TextInput};
 
@@ -12,13 +12,14 @@ pub struct PromptInput {
     pub labels: Labels,
 }
 
+#[derive(Default)]
 pub struct InputToPrompt {
     prompt_first: bool,
 }
 
 /// Transformation from text input to prompts.
 ///
-/// Prompt format: `[sequence]<<LABEL>>label1<<LABEL>label2...<<SEP>>[sequence]`. 
+/// Prompt format: `[sequence]<<LABEL>>label1<<LABEL>label2...<<SEP>>[sequence]`.
 /// The actual text comes before or after, depending on the `prompt_first` parameter.
 impl InputToPrompt {
     pub fn new(prompt_first: bool) -> Self {
@@ -39,14 +40,13 @@ impl InputToPrompt {
         result
     }
 
-    fn get_labels(labels: &Labels, index: usize) -> Result<&Vec<String>, Box<dyn std::error::Error + Send + Sync>> {
-        labels.get(index).ok_or_else(|| InputError::new("per-text labels must be aligned with texts").boxed())
-    }
-}
-
-impl Default for InputToPrompt {
-    fn default() -> Self {
-        Self { prompt_first: false }
+    fn get_labels(
+        labels: &Labels,
+        index: usize,
+    ) -> Result<&Vec<String>, Box<dyn std::error::Error + Send + Sync>> {
+        labels
+            .get(index)
+            .ok_or_else(|| InputError::new("per-text labels must be aligned with texts").boxed())
     }
 }
 
@@ -60,16 +60,15 @@ impl Composable<TextInput, PromptInput> for InputToPrompt {
             if self.prompt_first {
                 prompt.push_str(&text);
                 prompts.push(prompt);
-            }
-            else {
+            } else {
                 let mut text = text;
                 text.push_str(&prompt);
-                prompts.push(text);                
+                prompts.push(text);
             }
         }
-        Ok(PromptInput { 
-            prompts, 
-            labels: input.labels 
+        Ok(PromptInput {
+            prompts,
+            labels: input.labels,
         })
     }
 }
