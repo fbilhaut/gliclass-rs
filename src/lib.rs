@@ -14,8 +14,11 @@ pub mod output;
 pub mod pipeline;
 
 
-/// Convenience front-end for easy use with default runtime parameters (CPU).
-/// For more advanced use, see examples and the `orp` crate.
+/// Convenience front-end for GLiClass inference.
+///
+/// Use [`new()`](Self::new) for CPU inference. Use [`new_with_runtime()`](Self::new_with_runtime)
+/// to supply custom [`RuntimeParameters`](orp::params::RuntimeParameters) such as a CUDA
+/// execution provider. For lower-level control, use `orp::model::Model` directly (see examples).
 pub struct GLiClass {
     params: params::Parameters,
     pipeline: pipeline::ClassificationPipeline,
@@ -29,6 +32,30 @@ impl GLiClass {
             pipeline: pipeline::ClassificationPipeline::new(tokenizer_path, &params)?,
             model: orp::model::Model::new(model_path, orp::params::RuntimeParameters::default())?,
             params,            
+        })
+    }
+
+    /// Loads the model with custom [`RuntimeParameters`](orp::params::RuntimeParameters),
+    /// allowing selection of an execution provider such as CUDA for GPU acceleration.
+    ///
+    /// Requires the corresponding feature flag (e.g. `--features cuda`).
+    /// If the requested provider is unavailable at runtime, `ort` falls back to CPU.
+    ///
+    /// # Example
+    /// ```no_run
+    /// use ort::execution_providers::CUDAExecutionProvider;
+    /// use gliclass::{GLiClass, params::Parameters};
+    ///
+    /// let runtime = orp::params::RuntimeParameters::default()
+    ///     .with_execution_providers([CUDAExecutionProvider::default().build()]);
+    /// let gliclass = GLiClass::new_with_runtime("tokenizer.json", "model.onnx", Parameters::default(), runtime)?;
+    /// # Ok::<(), Box<dyn std::error::Error>>(())
+    /// ```
+    pub fn new_with_runtime<P: AsRef<std::path::Path>>(tokenizer_path: P, model_path: P, params: params::Parameters, runtime_params: orp::params::RuntimeParameters) -> crate::util::result::Result<Self> {
+        Ok(Self {
+            pipeline: pipeline::ClassificationPipeline::new(tokenizer_path, &params)?,
+            model: orp::model::Model::new(model_path, runtime_params)?,
+            params,
         })
     }
 
