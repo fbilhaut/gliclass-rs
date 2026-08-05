@@ -1,5 +1,7 @@
 //! Wrapper around HuggingFace tokenizers
 use std::path::Path;
+use tokenizers::PreTokenizerWrapper;
+
 use crate::util::result::Result;
 
 /// Wrapper around HuggingFace tokenizers
@@ -22,6 +24,14 @@ impl Tokenizer {
         padding.strategy = tokenizers::PaddingStrategy::BatchLongest;    
         
         tokenizer.with_padding(Some(padding));
+
+        let pretok = tokenizer.get_pre_tokenizer().unwrap().clone();
+        match pretok {
+            PreTokenizerWrapper::ByteLevel(pretok) => {
+                tokenizer.with_pre_tokenizer(Some(pretok.add_prefix_space(true)));
+            },
+            _ => {}
+        }
         
         Ok(Self { tokenizer })
     }
