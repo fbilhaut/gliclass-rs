@@ -49,7 +49,7 @@ impl GLiClass {
     /// let runtime = orp::params::RuntimeParameters::default()
     ///     .with_execution_providers([CUDAExecutionProvider::default().build()]);
     /// let gliclass = GLiClass::new_with_runtime("tokenizer.json", "model.onnx", Parameters::default(), runtime)?;
-    /// # Ok::<(), Box<dyn std::error::Error>>(())
+    /// # Ok::<(), gliclass::util::result::Error>(())
     /// ```
     pub fn new_with_runtime<P: AsRef<std::path::Path>>(tokenizer_path: P, model_path: P, params: params::Parameters, runtime_params: orp::params::RuntimeParameters) -> crate::util::result::Result<Self> {
         Ok(Self {
