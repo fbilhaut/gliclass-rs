@@ -15,7 +15,7 @@ These models are efficient for **zero-shot topic classification** or derivatives
 
 ```toml
 [dependencies]
-"gliclass-rs" = "0.9.x"
+"gliclass-rs" = "1"
 ```
 
 ```rust
