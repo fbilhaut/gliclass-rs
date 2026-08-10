@@ -1,14 +1,12 @@
 //! GLiClass Parameters
 
 /// Parameters for the GLiClass pipeline.
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct Parameters {    
+#[derive(Debug, Default, serde::Serialize, serde::Deserialize)]
+pub struct Parameters {
     prompt_first: bool,
 }
 
-
 impl Parameters {
-
     /// Load parameters from a `config.json` file as provided with the models
     pub fn from_json<P: AsRef<std::path::Path>>(path: P) -> crate::util::result::Result<Self> {
         let file = std::fs::File::open(path)?;
@@ -18,7 +16,7 @@ impl Parameters {
     }
 
     /// This parameter must be set according to the expectations of the loaded model.
-    /// 
+    ///
     /// Examples:
     /// * `gliclass-xxx-1.0` => `false`
     /// * `gliclass-modern-xxx-v2.0` => `true`
@@ -27,17 +25,8 @@ impl Parameters {
         self.prompt_first = b;
         self
     }
-    
+
     pub fn prompt_first(&self) -> bool {
         self.prompt_first
     }
 }
-
-impl Default for Parameters {
-    fn default() -> Self {
-        Self { 
-            prompt_first: false 
-        }
-    }
-}
-

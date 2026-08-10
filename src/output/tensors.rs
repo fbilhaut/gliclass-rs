@@ -1,6 +1,5 @@
-use ort::session::SessionOutputs;
 use super::super::input::text::Labels;
-
+use ort::session::SessionOutputs;
 
 /// Output tensors, right from the model
 pub struct OutputTensors<'a> {
@@ -12,6 +11,9 @@ impl<'a> TryFrom<(SessionOutputs<'a, 'a>, Labels)> for OutputTensors<'a> {
     type Error = crate::util::result::Error;
 
     fn try_from(value: (SessionOutputs<'a, 'a>, Labels)) -> Result<Self, Self::Error> {
-        Ok(OutputTensors { outputs: value.0, labels: value.1 })
+        Ok(OutputTensors {
+            outputs: value.0,
+            labels: value.1,
+        })
     }
 }
